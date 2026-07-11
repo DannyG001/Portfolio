@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YOUR_NAME — Cybersecurity Portfolio</title>
+  <meta name="description" content="Cybersecurity student portfolio — offensive & defensive security projects with live interactive demos." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ============ Top navigation ============ -->
+  <header class="site-nav" id="siteNav">
+    <a class="brand" href="#top"><span class="brand-mark">&gt;_</span> YOUR_NAME</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="nav-term" data-open-terminal type="button">⌘ Terminal</button>
+    </nav>
+  </header>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Cybersecurity · Offensive &amp; Defensive</p>
+      <h1 class="hero-name" id="heroName">YOUR_NAME</h1>
+      <p class="hero-role" id="heroRole">Cybersecurity Student · Aspiring Pentester / Blue Teamer</p>
+      <p class="hero-pitch">I break things to understand them, then figure out how to defend them.
+        This site is itself a demo — every project ships a live, in-browser walkthrough.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-ghost" id="heroResume" href="assets/resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <button class="btn btn-term" data-open-terminal type="button">&gt;_ Launch Terminal</button>
+      </div>
+    </div>
+    <div class="hero-glow" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ About ============ -->
+  <section class="section" id="about">
+    <h2 class="section-title"><span class="hash">#</span> about</h2>
+    <div class="about-grid">
+      <p class="about-text" id="aboutText"></p>
+      <ul class="about-facts" id="aboutFacts"></ul>
+    </div>
+  </section>
+
+  <!-- ============ Skills ============ -->
+  <section class="section" id="skills">
+    <h2 class="section-title"><span class="hash">#</span> skills</h2>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- ============ Projects ============ -->
+  <section class="section" id="projects">
+    <h2 class="section-title"><span class="hash">#</span> projects</h2>
+    <p class="section-sub">Each project runs a client-side demo — no backend, nothing leaves your browser.</p>
+    <div class="cards" id="projectCards"></div>
+  </section>
+
+  <!-- ============ Terminal CTA ============ -->
+  <section class="section term-cta" id="terminal-cta">
+    <div class="term-cta-card" data-open-terminal role="button" tabindex="0"
+         aria-label="Launch the interactive terminal">
+      <div class="term-cta-window" aria-hidden="true">
+        <div class="term-cta-bar">
+          <span class="tb-icon">&gt;_</span>
+          <span class="term-cta-title">guest@YOUR_NAME-portfolio: ~</span>
+        </div>
+        <div class="term-cta-body">
+<span class="ok">$</span> whoami<br />
+YOUR_NAME — security enthusiast<br />
+<span class="ok">$</span> ls projects/<br />
+portscan  logdetect  passwd  ...<br />
+<span class="blink">$ _</span>
+        </div>
+      </div>
+      <div class="term-cta-text">
+        <h2>Prefer a shell?</h2>
+        <p>Launch the interactive terminal — type commands, browse projects, and run the demos
+          the way I actually work. Click anywhere on this card to open it.</p>
+        <span class="btn btn-primary">&gt;_ Launch interactive terminal</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section class="section" id="contact">
+    <h2 class="section-title"><span class="hash">#</span> contact</h2>
+    <div class="contact-links" id="contactLinks"></div>
+  </section>
+
+  <footer class="site-footer">
+    <span id="footerName">YOUR_NAME</span> · built with plain HTML/CSS/JS ·
+    <button class="link-btn" data-open-terminal type="button">open terminal</button>
+  </footer>
+
+  <!-- ============ Terminal overlay (hidden until launched) ============ -->
+  <div class="overlay" id="termOverlay" hidden>
+    <div class="overlay-backdrop" data-close-terminal></div>
+    <main class="terminal" id="terminal" aria-label="Interactive terminal portfolio">
+      <div class="titlebar" id="titlebar">
+        <div class="tb-title" aria-hidden="true">
+          <span class="tb-icon">&gt;_</span>
+          <span class="titlebar-text">guest@YOUR_NAME-portfolio: ~</span>
+        </div>
+        <button class="reduce-motion-toggle" id="motionToggle" type="button" title="Toggle animations">motion: on</button>
+        <div class="winbtns">
+          <span class="winbtn min" title="minimize" aria-hidden="true">&#x2013;</span>
+          <span class="winbtn max" title="maximize" aria-hidden="true">&#x25a1;</span>
+          <button class="winbtn close" title="close" data-close-terminal aria-label="Close terminal">&#x2715;</button>
+        </div>
+      </div>
+      <nav class="quicknav" aria-label="Quick commands">
+        <button data-cmd="help">help</button>
+        <button data-cmd="about">about</button>
+        <button data-cmd="skills">skills</button>
+        <button data-cmd="projects">projects</button>
+        <button data-cmd="contact">contact</button>
+        <button data-cmd="clear">clear</button>
+      </nav>
+      <div class="scrollback" id="scrollback" aria-live="polite" role="log"></div>
+      <form class="inputline" id="inputForm" autocomplete="off">
+        <label class="prompt" for="cmdInput" aria-hidden="true">guest@YOUR_NAME-portfolio:~$</label>
+        <input type="text" id="cmdInput" name="cmd"
+          aria-label="Command input. Type help and press enter."
+          spellcheck="false" autocapitalize="off" />
+      </form>
+    </main>
+  </div>
+
+  <!-- ============ Demo modal (for 'Live demo' on cards) ============ -->
+  <div class="modal" id="demoModal" hidden>
+    <div class="modal-backdrop" data-close-demo></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
+      <div class="modal-head">
+        <span id="demoModalTitle" class="modal-title">Live demo</span>
+        <button class="modal-close" data-close-demo aria-label="Close demo">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="demoMount"></div>
+    </div>
+  </div>
+
+  <script src="js/commands.js"></script>
+  <script src="projects/portscan.js"></script>
+  <script src="projects/logdetector.js"></script>
+  <script src="projects/passwordentropy.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

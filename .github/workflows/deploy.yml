@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+# Auto-deploy on every push/merge to the default branch, and allow manual runs.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions the GITHUB_TOKEN needs to publish Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let one deployment finish before the next starts; don't cancel in-flight runs.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Static site: no build step. Upload the repo root as the Pages artifact.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
