@@ -27,6 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Turn on GitHub Pages via the API if it isn't enabled yet, so the
+      # deploy step won't 404 on the first run.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       # Static site: no build step. Upload the repo root as the Pages artifact.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
