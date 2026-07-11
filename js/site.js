@@ -47,9 +47,11 @@
       </div>
       <div class="card-tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
       <p class="card-summary">${p.summary}</p>
+      ${p.writeup ? `<p class="card-writeup">${p.writeup}</p>` : ""}
       <div class="card-actions">
         ${demoBtn}
         <button class="btn btn-sm btn-ghost" data-open-terminal data-term-cmd="open ${p.id}">In terminal</button>
+        ${p.repoUrl ? `<a class="btn btn-sm btn-ghost" href="${p.repoUrl}" target="_blank" rel="noopener">View code ↗</a>` : ""}
       </div>
     </article>`;
   }).join("");
@@ -59,6 +61,9 @@
   let pendingTermCmd = null;
 
   function openTerminal(cmd) {
+    // If the terminal was left minimized, restore it.
+    document.getElementById("terminal").classList.remove("minimized");
+    termOverlay.classList.remove("term-min");
     termOverlay.hidden = false;
     document.body.classList.add("no-scroll");
     window.initTerminal(); // safe to call repeatedly; runs once

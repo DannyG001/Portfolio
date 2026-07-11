@@ -11,7 +11,7 @@ const IDENTITY = {
 };
 
 const SKILLS = [
-  { group: "Offensive", items: ["Network recon (nmap)", "Web exploitation (OWASP Top 10)", "Burp Suite", "Privilege escalation", "CTF challenges"] },
+  { group: "Offensive", items: ["Network recon (nmap)", "Burp Suite", "Privilege escalation", "CTF challenges"] },
   { group: "Defensive", items: ["Log analysis / SIEM thinking", "Detection engineering", "Incident response basics", "Honeypots", "Wireshark"] },
   { group: "Tooling & Code", items: ["Python", "Bash", "Linux", "Git", "JavaScript", "SQL"] },
   { group: "Concepts", items: ["Cryptography basics", "TCP/IP networking", "Threat modeling", "Secure coding"] },

@@ -116,6 +116,7 @@ a { text-decoration: none; }
   transition: transform .12s, background .18s, border-color .18s, color .18s;
 }
 .btn:active { transform: translateY(1px); }
+a.btn { text-decoration: none; }
 .btn-primary { background: var(--accent); color: #062012; }
 .btn-primary:hover { background: #5cf3a2; }
 .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border); }
@@ -173,8 +174,9 @@ a { text-decoration: none; }
 .card-top h3 { margin: 0; font-size: 18px; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
 .card .tag { font-family: var(--mono); font-size: 11px; color: var(--dim); background: #10161f; border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; }
-.card-summary { color: var(--fg); opacity: .82; font-size: 14.5px; margin: 0 0 18px; flex: 1; }
-.card-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.card-summary { color: var(--fg); opacity: .82; font-size: 14.5px; margin: 0 0 12px; }
+.card-writeup { color: var(--dim); font-size: 13.5px; line-height: 1.55; margin: 0 0 18px; }
+.card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
 
 /* Status badges (shared with terminal list) */
 .badge { font-size: 11px; padding: 3px 9px; border-radius: 999px; white-space: nowrap; font-family: var(--mono); }
@@ -326,6 +328,66 @@ a { text-decoration: none; }
 }
 .winbtn.close:hover { background: var(--red); color: #2a0d0b; }
 .winbtn.min:hover, .winbtn.max:hover { background: #4a5568; }
+
+/* Maximized: fill the viewport (beats the inline styles set by dragging). */
+.terminal.maximized {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0;
+}
+
+/* Minimized: dock as a titlebar-only pill, bottom-left. */
+.terminal.minimized {
+  position: fixed !important;
+  left: 16px !important;
+  top: auto !important;
+  bottom: 16px;
+  width: 320px !important;
+  max-width: 320px !important;
+  height: auto !important;
+}
+.terminal.minimized .quicknav,
+.terminal.minimized .scrollback,
+.terminal.minimized .inputline,
+.terminal.minimized .reduce-motion-toggle { display: none; }
+.terminal.minimized .titlebar { cursor: pointer; }
+
+/* While minimized, the overlay lets you use the page behind it. */
+.overlay.term-min { pointer-events: none; }
+.overlay.term-min .overlay-backdrop { display: none; }
+.overlay.term-min .terminal { pointer-events: auto; }
+
+/* 'darklord' easter-egg window */
+.darklord-window {
+  position: fixed;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1200;
+  width: min(420px, 90vw);
+  background: var(--panel);
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+.darklord-titlebar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 8px 6px 12px;
+  background: linear-gradient(#3a2430, #2b1a24);
+  border-bottom: 1px solid var(--red);
+  font-family: var(--mono); font-size: 12px; color: var(--red);
+}
+.darklord-titlebar button {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--fg); width: 22px; height: 22px; border-radius: 6px; cursor: pointer;
+}
+.darklord-titlebar button:hover { border-color: var(--red); color: var(--red); }
+.darklord-window img { display: block; width: 100%; }
 
 .reduce-motion-toggle {
   background: transparent;

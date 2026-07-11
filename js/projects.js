@@ -9,6 +9,9 @@ const PROJECTS = [
     tags: ["offensive", "recon", "networking"],
     status: "done",
     summary: "Animated nmap-style scan of a mock host — watch ports resolve open/closed/filtered.",
+    writeup:
+      "Shows what a TCP port scan actually tells you: each port resolves to open, closed, or filtered, mirroring how nmap reports a host's attack surface. I built it to turn raw scanner output — which is dense and easy to misread — into something you can watch happen. Writing it forced me to understand what each port state really means at the packet level (SYN/ACK vs RST vs silence) rather than just reading nmap's summary. Illustrative demo: it scans a mock host in the browser, not a real network.",
+    repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/portscan.js",
     mount: (el) => DEMO_PORTSCAN(el),
   },
   {
@@ -17,6 +20,9 @@ const PROJECTS = [
     tags: ["defensive", "detection", "SIEM"],
     status: "done",
     summary: "A live auth-log feed with a tunable detection rule that fires alerts on repeated failures.",
+    writeup:
+      "A miniature SIEM detection: a streaming auth log plus a threshold rule (N failed logins in a window) that fires alerts, exactly the shape of a real brute-force detection. I built it to explore detection engineering's core tradeoff — tighten the rule and you miss slow attacks, loosen it and you drown in false positives — and the tunable threshold lets you feel that tradeoff live. Illustrative demo: the log feed is simulated in the browser.",
+    repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/logdetector.js",
     mount: (el) => DEMO_LOGDETECT(el),
   },
   {
@@ -25,6 +31,9 @@ const PROJECTS = [
     tags: ["crypto", "auth"],
     status: "done",
     summary: "Type a password: see entropy, estimated crack time, and why hashing choice matters.",
+    writeup:
+      "Demonstrates why password strength is really about entropy and hashing cost: type a password and watch its entropy, estimated crack time, and how the hash algorithm (fast MD5 vs slow bcrypt) changes the math by orders of magnitude. I built it because 'use a strong password' is advice people ignore until they see the numbers. Working out the crack-time estimates taught me how attacker hardware assumptions and hash choice dominate the calculation far more than adding a symbol does. Illustrative demo: estimates run entirely client-side.",
+    repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/passwordentropy.js",
     mount: (el) => DEMO_PASSWD(el),
   },
   {

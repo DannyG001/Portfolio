@@ -79,6 +79,7 @@ window.initTerminal = function initTerminal() {
     function onDown(e) {
       // Ignore drags starting on interactive controls in the bar.
       if (e.target.closest("button, .winbtn")) return;
+      if (term.classList.contains("maximized") || term.classList.contains("minimized")) return;
       if (!fixedMode) goFixed();
       dragging = true;
       bar.classList.add("dragging");
@@ -110,6 +111,64 @@ window.initTerminal = function initTerminal() {
       if (fixedMode) setPos(parseFloat(term.style.left) || 0, parseFloat(term.style.top) || 0);
     });
   })();
+
+  /* ---- Minimize / maximize window controls ---- */
+  (function windowControls() {
+    const term = document.getElementById("terminal");
+    const overlay = document.getElementById("termOverlay");
+    const bar = document.getElementById("titlebar");
+    const minBtn = document.getElementById("termMinBtn");
+    const maxBtn = document.getElementById("termMaxBtn");
+    if (!term || !minBtn || !maxBtn) return;
+
+    function setMinimized(on) {
+      term.classList.toggle("minimized", on);
+      overlay.classList.toggle("term-min", on);
+      // While minimized the page behind should be usable again.
+      document.body.classList.toggle("no-scroll", !on);
+      if (!on) input.focus();
+    }
+    function toggleMax() {
+      if (term.classList.contains("minimized")) setMinimized(false);
+      term.classList.toggle("maximized");
+      input.focus();
+    }
+
+    minBtn.addEventListener("click", () => setMinimized(!term.classList.contains("minimized")));
+    maxBtn.addEventListener("click", toggleMax);
+    bar.addEventListener("dblclick", (e) => {
+      if (!e.target.closest("button")) toggleMax();
+    });
+    // Clicking the docked bar restores.
+    bar.addEventListener("click", (e) => {
+      if (term.classList.contains("minimized") && !e.target.closest("button")) setMinimized(false);
+    });
+    // Reset both states whenever the terminal is closed. (Don't touch
+    // body.no-scroll here — site.js's closeTerminal owns that.)
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-close-terminal]")) {
+        term.classList.remove("maximized", "minimized");
+        overlay.classList.remove("term-min");
+      }
+    });
+  })();
+
+  /* ---- 'darklord' easter egg: floating gif window, self-closes after 3 loops ---- */
+  let darklordWin = null;
+  function summonDarklord() {
+    if (darklordWin) darklordWin.remove();
+    const win = document.createElement("div");
+    win.className = "darklord-window";
+    win.innerHTML =
+      `<div class="darklord-titlebar"><span>darklord.exe</span><button type="button" aria-label="Close">&#x2715;</button></div>` +
+      // Cache-buster restarts the gif from frame 0 on every summon.
+      `<img src="extras/darklord.gif?${Date.now()}" alt="the dark lord appears" />`;
+    document.body.appendChild(win);
+    darklordWin = win;
+    const dismiss = () => { win.remove(); if (darklordWin === win) darklordWin = null; };
+    win.querySelector("button").addEventListener("click", dismiss);
+    setTimeout(dismiss, 4800); // gif loop is 1.6s → 3 loops
+  }
 
   function appendHTML(html) {
     const wrap = document.createElement("div");
@@ -151,6 +210,11 @@ window.initTerminal = function initTerminal() {
     if (lower === "open") {
       return openProject(args[0]);
     }
+    if (lower === "darklord") {
+      appendHTML(`<div class="line err">⚠ summoning the dark lord…</div>`);
+      summonDarklord();
+      return;
+    }
     // Multi-word easter egg
     if (COMMANDS[cmd.toLowerCase()]) {
       appendHTML(COMMANDS[cmd.toLowerCase()]());
@@ -180,6 +244,11 @@ window.initTerminal = function initTerminal() {
         `<div class="block"><span class="head">${p.title}</span> <span class="badge planned">planned</span>\n${p.summary}\n<span class="muted">Concept only for now — the interactive demo is on the roadmap.</span></div>`
       );
       return;
+    }
+    if (p.writeup) {
+      appendHTML(
+        `<div class="block"><span class="head">// ${p.title}</span>\n${p.writeup}${p.repoUrl ? `\n<span class="muted">source:</span> <a href="${p.repoUrl}" target="_blank" rel="noopener">${p.repoUrl}</a>` : ""}</div>`
+      );
     }
     const wrap = appendHTML(`<div class="demo" id="demo-${p.id}"></div>`);
     const el = wrap.querySelector(".demo");
