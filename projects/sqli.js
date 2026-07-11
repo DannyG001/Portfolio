@@ -54,12 +54,10 @@ function DEMO_SQLI(el) {
         `SELECT * FROM users\nWHERE username = <span class="ok">?</span> AND password = <span class="ok">?</span>;\n` +
         `<span class="muted">params:</span> [<span class="warn">${esc(u) || "∅"}</span>, <span class="warn">${esc(p) || "∅"}</span>]`;
     } else {
-      const raw = `SELECT * FROM users WHERE username = '${u}' AND password = '${p}';`;
       // Highlight the attacker-controlled span so the injection is visible.
       queryBox.innerHTML =
         `SELECT * FROM users WHERE username = '<span class="warn">${esc(u)}</span>' ` +
         `AND password = '<span class="warn">${esc(p)}</span>';`;
-      queryBox.dataset.raw = raw;
     }
   }
 

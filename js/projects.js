@@ -43,7 +43,7 @@ const PROJECTS = [
     status: "done",
     summary: "A fake login where payloads build the live query — then a 'patched' toggle shows parameterized queries blocking it.",
     writeup:
-      "Makes SQL injection concrete by showing your input become part of the query in real time: in vulnerable mode a classic `' OR '1'='1' --` payload rewrites the WHERE clause and logs you in with no password, and the patched toggle switches to a parameterized query where the same payload is just an inert string. I built it because injection is easy to memorize and hard to actually picture — seeing the query assemble is what makes it click. It also drove home the fix: the vulnerability isn't 'bad input,' it's mixing code and data, which parameterization separates. Illustrative demo: there's no real database, the outcome is decided by inspecting the assembled string.",
+      "Makes SQL injection concrete by showing your input become part of the query in real time: in vulnerable mode a classic <code>' OR '1'='1' --</code> payload rewrites the WHERE clause and logs you in with no password, and the patched toggle switches to a parameterized query where the same payload is just an inert string. I built it because injection is easy to memorize and hard to actually picture — seeing the query assemble is what makes it click. It also drove home the fix: the vulnerability isn't “bad input,” it's mixing code and data, which parameterization separates. Illustrative demo: there's no real database, the outcome is decided by inspecting the assembled string.",
     repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/sqli.js",
     mount: (el) => DEMO_SQLI(el),
   },
@@ -54,7 +54,7 @@ const PROJECTS = [
     status: "done",
     summary: "Challenge cards (category / difficulty / points) that expand into step-by-step solutions with reveal-flag.",
     writeup:
-      "Presents Capture-the-Flag solves the way I think through them: each card names the category, difficulty, and points, then expands into the reasoning that gets from the prompt to the flag — cookie tampering, cleartext-credential forensics, single-byte XOR, and path traversal. I built it because a good writeup is as much a skill as the solve itself: explaining *why* a step works is how you turn a lucky hunch into a repeatable method. Writing these forced me to articulate the root cause behind each bug, not just the exploit. Illustrative: these are example writeups in the style of real solves, not a claim of specific competition placements.",
+      "Presents Capture-the-Flag solves the way I think through them: each card names the category, difficulty, and points, then expands into the reasoning that gets from the prompt to the flag — cookie tampering, cleartext-credential forensics, single-byte XOR, and path traversal. I built it because a good writeup is as much a skill as the solve itself: explaining <em>why</em> a step works is how you turn a lucky hunch into a repeatable method. Writing these forced me to articulate the root cause behind each bug, not just the exploit. Illustrative: these are example writeups in the style of real solves, not a claim of specific competition placements.",
     repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/ctf.js",
     mount: (el) => DEMO_CTF(el),
   },
@@ -76,7 +76,7 @@ const PROJECTS = [
     status: "done",
     summary: "Paste an email; the tool flags spoofed senders, mismatched links, and urgency cues with explanations.",
     writeup:
-      "Turns 'look for the red flags' into something you can measure: paste an email and it highlights lookalike sender domains, links whose host doesn't match the brand they claim, urgency and threat language, and requests for credentials — each with a plain-English reason and a combined risk score. I built it to make the analyst's mental checklist explicit, because most people can spot a bad email but can't say exactly *what* tipped them off. Writing the heuristics taught me how much phishing detection is pattern-matching on sender/link/urgency signals rather than any single smoking gun. Illustrative: a lightweight rule-based scan, not a production classifier, and it runs entirely in your browser.",
+      "Turns 'look for the red flags' into something you can measure: paste an email and it highlights lookalike sender domains, links whose host doesn't match the brand they claim, urgency and threat language, and requests for credentials — each with a plain-English reason and a combined risk score. I built it to make the analyst's mental checklist explicit, because most people can spot a bad email but can't say exactly <em>what</em> tipped them off. Writing the heuristics taught me how much phishing detection is pattern-matching on sender/link/urgency signals rather than any single smoking gun. Illustrative: a lightweight rule-based scan, not a production classifier, and it runs entirely in your browser.",
     repoUrl: "https://github.com/DannyG001/Portfolio/blob/main/projects/phish.js",
     mount: (el) => DEMO_PHISH(el),
   },

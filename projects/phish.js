@@ -65,9 +65,6 @@ PayPal Security Team`;
       if (brandHit && !fromDomain.endsWith(brandHit + ".com")) {
         flags.push(["high", `Sender domain <code>${esc(fromDomain)}</code> imitates <b>${brandHit}</b> but isn't the official <code>${brandHit}.com</code> — likely a spoof/lookalike.`]);
       }
-      if (/\d/.test(fromDomain.split(".")[0]) && KNOWN_BRANDS.some((b) => fromDomain.includes(b.replace("l", "1").replace("o", "0")))) {
-        // covered by lookalike above in most cases
-      }
     }
 
     // 2. Links: raw URLs, suspicious TLDs, IP hosts, brand-in-path tricks.
