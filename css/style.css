@@ -560,6 +560,76 @@ a { color: var(--cyan); }
 .pw-stats div { margin: 2px 0; }
 .crack-anim { font-size: 12px; color: var(--dim); margin-top: 8px; min-height: 18px; }
 
+/* SQL injection sandbox */
+.sqli-query {
+  font-family: var(--mono); font-size: 12.5px; white-space: pre-wrap; word-break: break-word;
+  background: #0a0e14; border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px; margin: 4px 0 10px; color: var(--fg); line-height: 1.5;
+}
+.alertbox code, .sqli-query code { color: var(--amber); }
+.alertbox.warn-box { border-color: var(--amber); color: var(--amber); background: rgba(255,190,60,.07); }
+.alertbox.ok-box { border-color: var(--green); color: var(--green); background: rgba(61,220,132,.07); }
+
+/* CTF writeups */
+.ctf-grid { display: flex; flex-direction: column; gap: 8px; }
+.ctf-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #0a0e14; }
+.ctf-card.expanded { border-color: var(--cyan); }
+.ctf-head {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: transparent !important; border: none !important; color: var(--fg) !important;
+  padding: 10px 12px !important; cursor: pointer; text-align: left;
+}
+.ctf-title { font-weight: 600; font-size: 13.5px; }
+.ctf-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; font-size: 10.5px; font-family: var(--mono); }
+.ctf-cat, .ctf-diff, .ctf-pts { padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border); }
+.ctf-cat { color: var(--cyan); }
+.ctf-diff.diff-easy { color: var(--green); border-color: var(--green); }
+.ctf-diff.diff-medium { color: var(--amber); border-color: var(--amber); }
+.ctf-diff.diff-hard { color: var(--red); border-color: var(--red); }
+.ctf-pts { color: var(--dim); }
+.ctf-body { padding: 0 14px 12px; border-top: 1px solid var(--border); }
+.ctf-prompt { color: var(--dim); font-size: 13px; margin: 10px 0; }
+.ctf-steps { margin: 0 0 12px; padding-left: 20px; font-size: 13px; color: var(--fg); }
+.ctf-steps li { margin: 4px 0; }
+.ctf-flagval { color: var(--green); background: rgba(61,220,132,.08); padding: 4px 8px; border-radius: 5px; }
+
+/* Honeypot */
+.hp-diagram { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 14px; }
+.hp-node {
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; background: #0a0e14; text-align: center;
+}
+.hp-node span { display: block; font-size: 10px; color: var(--dim); }
+.hp-pot { border-color: var(--amber); color: var(--amber); transition: box-shadow .15s, border-color .15s; }
+.hp-pot.hit { box-shadow: 0 0 0 3px rgba(255,190,60,.25); }
+.hp-arrow { color: var(--dim); font-family: var(--mono); transition: color .15s; }
+.hp-arrow.pulse { color: var(--red); }
+.hp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: var(--mono); }
+.hp-table th, .hp-table td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); }
+.hp-table th { color: var(--dim); font-weight: normal; }
+.hp-table td { color: var(--fg); }
+
+/* Phishing analyzer */
+.ph-input {
+  width: 100%; box-sizing: border-box; font-family: var(--mono); font-size: 12.5px;
+  background: #0a0e14; border: 1px solid var(--border); color: var(--fg);
+  border-radius: 6px; padding: 8px; resize: vertical; margin-bottom: 10px;
+}
+.ph-score { font-size: 13.5px; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border); color: var(--dim); margin-bottom: 10px; }
+.ph-score.firing { border-color: var(--red); color: var(--red); background: rgba(255,95,86,.08); }
+.ph-score.warn-box { border-color: var(--amber); color: var(--amber); background: rgba(255,190,60,.07); }
+.ph-score.ok-box { border-color: var(--green); color: var(--green); background: rgba(61,220,132,.07); }
+.ph-flags { display: flex; flex-direction: column; gap: 6px; }
+.ph-flag { font-size: 12.5px; padding: 7px 9px; border-radius: 6px; border-left: 3px solid var(--border); background: #0a0e14; line-height: 1.45; }
+.ph-flag code { color: var(--amber); }
+.ph-flag.sev-high { border-left-color: var(--red); }
+.ph-flag.sev-med { border-left-color: var(--amber); }
+.ph-flag.sev-low { border-left-color: var(--dim); }
+.ph-sev { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-right: 6px; background: #10161f; }
+.ph-flag.sev-high .ph-sev { color: var(--red); }
+.ph-flag.sev-med .ph-sev { color: var(--amber); }
+.ph-flag.sev-low .ph-sev { color: var(--dim); }
+
 .hint { color: var(--dim); font-size: 12px; margin-top: 14px; text-align: center; }
 .hint code { color: var(--amber); }
 
